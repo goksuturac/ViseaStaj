@@ -18,6 +18,11 @@ img = cv2.imread('images//input//lowContrast.png', cv2.IMREAD_GRAYSCALE)
 ret,thresh1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
 ret,thresh2 = cv2.threshold(img,127,255,cv2.THRESH_BINARY_INV)
 
+original_his = cv2.calcHist([img], [0], None, [256], [0, 256])
+binary_his = cv2.calcHist([thresh1], [0], None, [256], [0, 256])
+binary_inv_his = cv2.calcHist([thresh2], [0], None, [256], [0, 256])
+
+
 titles = ['Original Image','BINARY','BINARY_INV']
 images = [img, thresh1, thresh2]
 for i in range(3):
