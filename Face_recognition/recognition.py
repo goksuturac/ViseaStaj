@@ -43,23 +43,31 @@ def face_recognition_video(video_path):
         
         cv2.imshow('Face Detection || press "x" to exit', frame)
         
-        if cv2.waitKey(1) & 0xFF == ord('x'):
+        if cv2.waitKey(50) & 0xFF == ord('x'):
             break
-
+    return cap
+  
+def face_recognition_in_gif(gif_path):
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    cap =cv2.VideoCapture(gif_path)
+    while True:
+        ret, frame = cap.read()   
+        if not ret:
+            break
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
-    # def face_recognition_in_gif(gif_path):
-#     gif = cv2.VideoCapture(gif_path)
-#     face_locations = []
-#     while True:
-#         ret, frame = gif.read()   
-#         if not ret:
-#             break
-#         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-#         face_locations_in_frame = face_recognition.face_locations(rgb_frame)
-#         face_locations.extend(face_locations_in_frame)
-#     gif.release()
-#     return face_locations
+        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+        
+        for (x, y, w, h) in faces:
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+        
+        cv2.imshow('Face Detection in GIF', frame)
+        
+        if cv2.waitKey(50) & 0xFF == ord('x'):
+            break
+    return cap
 
 if __name__ == "__main__":
-    #face_recognition_photo_haarcascade("Face_recognition/input/miranda_face.jpg")
-    face_recognition_video("Face_recognition/input/head-pose-face-detection-female.mp4")    
+    face_recognition_photo_haarcascade("Face_recognition/input/miranda_face.jpg")
+    face_recognition_video("Face_recognition/input/head-pose-face-detection-female.mp4")  
+    face_recognition_in_gif("Face_recognition\input\head-pose-face-detection-male.gif")  
