@@ -111,8 +111,8 @@ class FashionMNISTModelV0(nn.Module):
 
 
 model = FashionMNISTModelV0(input_shape=784,
-                            hidden_layers=3,
-                            hidden_units=20,
+                            hidden_layers=10,
+                            hidden_units=40,
                             output_shape=len(class_names)
 )
 

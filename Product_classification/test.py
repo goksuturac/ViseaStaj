@@ -16,10 +16,10 @@ def test(model, test_loader):
     print(f"Accuracy: {100 * correct / total}%")
 
 if __name__ == "__main__":
-    batch_size = 64
+    batch_size = 32
 
     _, test_loader = get_dataloaders(batch_size)
-    model = FashionMNISTModelV0(input_shape=784, hidden_units=20, hidden_layers=2, output_shape=10)
+    model = FashionMNISTModelV0(input_shape=784, hidden_units=40, hidden_layers=10, output_shape=10)
     torch.save(model.state_dict(), "model.pth")
     model.load_state_dict(torch.load("model.pth"))
     test(model, test_loader)
