@@ -29,7 +29,7 @@ def train(model, train_loader, optimizer, criterion, num_epochs):
     torch.save(model.state_dict(),MODEL_SAVE_PATH)
 
 if __name__ == "__main__":
-    batch_size = 64
+    batch_size = 32
     num_epochs = 10
 
     train_loader, _ = get_dataloaders(batch_size)
