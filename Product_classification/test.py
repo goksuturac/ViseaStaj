@@ -20,6 +20,6 @@ if __name__ == "__main__":
 
     _, test_loader = get_dataloaders(batch_size)
     model = FashionMNISTModelV0(input_shape=784, hidden_units=20, hidden_layers=2, output_shape=10)
-    torch.save(model.state_dict(), "computer_vision/model.pth")
-    model.load_state_dict(torch.load("computer_vision/model.pth"))
+    torch.save(model.state_dict(), "model.pth")
+    model.load_state_dict(torch.load("model.pth"))
     test(model, test_loader)

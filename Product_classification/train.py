@@ -18,7 +18,7 @@ def train(model, train_loader, optimizer, criterion, num_epochs):
             running_loss += loss.item()
         print(f"Epoch {epoch+1}/{num_epochs}, Loss: {running_loss/len(train_loader)}")
     # 1. creating file directory
-    MODEL_PATH = Path("computer_vision/models")
+    MODEL_PATH = Path("models")
     MODEL_PATH.mkdir(parents=True, exist_ok=True)
 
     # 2. creating file save path
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     num_epochs = 10
 
     train_loader, _ = get_dataloaders(batch_size)
-    model = FashionMNISTModelV0()
+    model = FashionMNISTModelV0(input_shape=784, hidden_units=40, hidden_layers=10, output_shape=10)
     optimizer = optim.Adam(model.parameters(), lr=0.001)
     criterion = nn.CrossEntropyLoss()
 
