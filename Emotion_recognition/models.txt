@@ -1,0 +1,53 @@
+import torchvision.transforms as transforms
+torchvision.transforms: Görüntü dönüşümleri için kullanılır.
+
+from torch.utils.data import DataLoader
+torch.utils.data.DataLoader: Veri yükleyici oluşturmak için kullanılır.
+
+from torchvision.datasets import ImageFolder
+torchvision.datasets.ImageFolder: Veri setini yüklemek için kullanılır.
+
+import matplotlib.pyplot as plt
+matplotlib.pyplot: Görüntü görselleştirmesi için kullanılır.
+
+import random
+random: Rastgele sayılar oluşturmak için kullanılır.
+
+import numpy as np
+numpy: Diziler ve matematiksel işlemler için kullanılır.
+
+transform = transforms.Compose([
+    # Resim yeniden boyutlandırıldı
+    transforms.Resize((224,224)),
+    # Torch içinde kullanılan tensör nesnesine çevrildi
+    transforms.ToTensor(),
+    # Normalizasyon işlemi yapıldı. Piksel değerleri 0-1 aralığına indirgendi
+    transforms.Normalize((0.5,), (0.5,))
+])
+transforms.Compose: Birden fazla dönüşümü birleştirmek için kullanılır. Sırayla uygulanırlar.
+transforms.ToTensor: Görüntüyü PyTorch tensörüne dönüştürür.
+transforms.Normalize: Görüntü piksel değerlerini normalleştirir.
+
+train_data = ImageFolder(root='Emotion_recognition\\dataset\\train', transform=transform)
+validation_data = ImageFolder(root='Emotion_recognition\\dataset\\test', transform=transform)
+ImageFolder: Belirtilen kök dizinindeki görüntü dosyalarını yükler.
+
+
+batch_size = 32
+train_loader = DataLoader(train_data, batch_size, shuffle=True)
+validation_loader = DataLoader(validation_data, batch_size, shuffle=False)
+DataLoader: Veri yükleyicisi oluşturur. Bu, eğitim ve doğrulama verilerini toplu halinde yüklemek için kullanılır.
+
+idx = random.randint(0, 10)
+random.randint: Rastgele bir indeks seçer.
+
+tensor = train_data.__getitem__(idx)[0]
+train_data.__getitem__: Belirtilen indeksteki görüntüyü alır.
+
+image = np.squeeze(tensor.numpy())
+np.squeeze: Tensörden gereksiz boyutları kaldırır.
+
+image = (image - np.min(image)) / (np.max(image) - np.min(image))
+image = image.transpose((1, 2, 0))
+plt.imshow(image)
+plt.show()
