@@ -1,16 +1,8 @@
 import numpy as np
 import pandas as pd
+import cv2
 from sklearn.model_selection import train_test_split
 import os
-class DataLoader:
-    def __init__(self, data_path, target_column, test_size=0.2, random_state=None):
-        self.data_path = data_path
-        self.target_column = target_column
-        self.test_size = test_size
-        self.random_state = random_state
- 
-    import os
-import cv2
 
 class DataLoader:
     def __init__(self, data_dir, target_size=(224, 224),  random_state=None):
@@ -33,7 +25,6 @@ class DataLoader:
                 img = cv2.resize(img, self.target_size)
                 X.append(img)
                 y.append(class_indices[cls_name])
-
         X = np.array(X)
         y = np.array(y)
 
@@ -61,6 +52,5 @@ class DataLoader:
 
     def get_test_data_loader(self):
         # Test veri yükleyiciyi oluştur
-        #_ işareti load data fonksiyonunun döndürdüğü o değerlere ihtiyaç olmadığında kullanılmamak üzere yazıldı.
         _, X_test, _, y_test = self.load_data()
         return X_test, y_test
