@@ -9,8 +9,9 @@ train_path = []
 classes = []
 
 for data_path in glob.glob(train_datapath + '\\*'):
-    classes.append(data_path.split('\\')[-1])
-    train_path.extend(glob.glob(data_path + '\\*'))
+     classes.append(data_path.split('\\')[-1])
+     train_path.extend(glob.glob(data_path + '\\*'))
+     
 
 train_image_paths = list(pdf(train_path))
 random.shuffle(train_image_paths)
