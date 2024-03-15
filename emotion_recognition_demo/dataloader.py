@@ -17,12 +17,10 @@ class Dataloader:
     
     def __on_epoch_end__(self):
         if self.shuffle:
-            print("on epoch end")
+            print("end of epoch")
             random.shuffle(self.image_paths)
     
     def __getitem__(self, idx):
-        
-            
         data_path = self.image_paths[idx * self.batch_size : self.batch_size*idx + self.batch_size]
         
         for i, path in enumerate(data_path):
@@ -41,9 +39,9 @@ class Dataloader:
                 X = x.clone().unsqueeze(0)
                 Y = y.clone().unsqueeze(0)
             else:
+                #torch.cat() can be seen as an inverse operation for torch.split() and torch.chunk()
                 X = torch.cat((X, x.clone().unsqueeze(0)), dim=0)
                 Y = torch.cat((Y, y.clone().unsqueeze(1)), dim=0)
-        
             try:
                 return X, Y
             except:
