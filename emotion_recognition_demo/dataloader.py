@@ -38,13 +38,13 @@ class Dataloader:
             y = torch.tensor(int(label), dtype= torch.float32).cuda()
             
             if i == 0:
-                XAll = x.clone().unsqueeze(0)
-                YAll = y.clone().unsqueeze(0)
+                X = x.clone().unsqueeze(0)
+                Y = y.clone().unsqueeze(0)
             else:
-                XAll = torch.cat((XAll, x.clone().unsqueeze(0)), dim=0)
-                YAll = torch.cat((YAll, y.clone().unsqueeze(1)), dim=0)
+                X = torch.cat((X, x.clone().unsqueeze(0)), dim=0)
+                Y = torch.cat((Y, y.clone().unsqueeze(1)), dim=0)
         
             try:
-                return XAll, YAll
+                return X, Y
             except:
                 print("error")
