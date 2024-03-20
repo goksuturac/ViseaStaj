@@ -2,12 +2,12 @@ import cv2
 import random
 import torch
 import numpy as np
-
-class Dataloader:
+import os 
+class Dataloader():
    
     def __init__(self, image_paths, batch_size=1, shuffle = True): 
-        with open(image_paths) as f:
-            image_paths = f.read().split('\n')
+        image_paths = [os.path.join(image_paths, file) for file in os.listdir(image_paths) if file.endswith('.jpg')]
+
         self.image_paths = image_paths
         self.batch_size = batch_size
         self.shuffle = shuffle 
