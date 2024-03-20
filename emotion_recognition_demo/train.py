@@ -1,17 +1,22 @@
 import torch
+import os
+import data_path
 import torch.nn as nn
 import torch.optim as optim
 from dataloader import Dataloader
 from model import CustomVGG16
 
-image_paths = "dataset\\train"
-train_loader = Dataloader(image_paths=image_paths)
+# eğitim verisi yyüklendi
+train_loader_path = data_path.train_image_paths
+train_loader = Dataloader(image_paths=train_loader_path, batch_size=32, shuffle=True)
 
+# model oluştu
 num_classes = 7 
 model = CustomVGG16(num_classes)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.0001)
 
+# train 
 num_epochs = 10
 for epoch in range(num_epochs):
     running_loss = 0.0

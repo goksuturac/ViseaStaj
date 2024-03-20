@@ -3,9 +3,10 @@ import random
 import torch
 import numpy as np
 import os 
+
 class Dataloader():
    
-    def __init__(self, image_paths, batch_size=1, shuffle = True): 
+    def __init__(self, image_paths, batch_size=32, shuffle = True): 
         image_paths = [os.path.join(image_paths, file) for file in os.listdir(image_paths) if file.endswith('.jpg')]
 
         self.image_paths = image_paths
